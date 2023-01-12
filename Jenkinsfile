@@ -13,20 +13,25 @@ pipeline{
 
         stage("Build"){
             steps{
-                echo "Building the application..."
+                script{
+                    gv.Build()
+                }
             }
         }
 
         stage("Test"){
             steps{
-                echo "Testing the application..."
+                script{
+                    gv.Test()
+                }
             }
         }
 
         stage("Deploy"){
             steps{
-                echo "Deploying the application..."
-                echo "Version: ${params.version}"
+                script{
+                    gv.Deploy()
+                }
             }
         }
     }
