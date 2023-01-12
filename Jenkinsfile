@@ -19,9 +19,9 @@ pipeline{
         stage("Build docker image"){
             steps{
                 echo "Building the docker image..."
-                withCredentials([usernamePassword(credentialsId: 'c8addfe9-3636-48da-9bdd-9583c2034825', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){
+                withCredentials([usernamePassword(credentialsId: 'af5367d3-fa1c-4d74-8d24-89f3e39aa3c8', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){
                     sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                    sh 'docker build -t mymavenapp:${params.version} .'
+                    sh 'docker build -t ankitraz/myapp:${params.version} .'
                     sh 'docker push mymavenapp:${params.version}'
                 }
             }
