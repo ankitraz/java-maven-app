@@ -1,6 +1,9 @@
 pipeline{
     agent any
 
+    tools{
+        maven 
+    }
     parameters{
         choice(name: 'version', choices: ['1.1.0','1.1.1','1.1.2'], description: 'Select the version to deploy')
     }
