@@ -1,11 +1,16 @@
+def gv
+
 pipeline{
     agent any
 
-    parameters{
-        choice(name: 'version', choices: ['1.1.0','1.1.1','1.1.2'], description: 'Select the version to deploy')
-    }
 
     stages{
+        stage("init"){
+            steps{
+                gv = load 'script.groovy'
+            }
+        }
+
         stage("Build"){
             steps{
                 echo "Building the application..."
