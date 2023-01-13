@@ -1,3 +1,4 @@
+define gv
 pipeline{
     agent any
 
@@ -7,10 +8,21 @@ pipeline{
     
 
     stages{
+
+
+        stage("init"){
+            steps{
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
         stage("Build jar"){
             steps{
-                echo "Building the application..."
-                sh 'mvn package'
+                script{
+                    gv.Build()
+                }
             }
         }
 
