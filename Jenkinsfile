@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+@Library('jenkins-shared-library')
+//note : if you don't have a def then you will have to add _ after closing bracket of @library
 def gv
 
 pipeline{
@@ -17,7 +20,15 @@ pipeline{
         stage("Build"){
             steps{
                 script{
-                    gv.Build()
+                    buildJar()
+                }
+            }
+        }
+
+        stage("Build Image"){
+            steps{
+                script{
+                    buildImage()
                 }
             }
         }
