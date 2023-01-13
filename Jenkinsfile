@@ -28,10 +28,12 @@ pipeline{
             }
         }
 
-        stage("Build Image"){
+        stage("Build and push Image"){
             steps{
                 script{
                     buildImage 'ankitraz/myapp:1.0'
+                    dockerLogin()
+                    dockerPush 'ankitraz/myapp:1.0'
                 }
             }
         }
