@@ -1,6 +1,13 @@
 #!/usr/bin/env groovy
-@Library('jenkins-shared-library')
+// @Library('jenkins-shared-library@master') //used when jenkins shared library is configured in Jenkins
 //note : if you don't have a def then you will have to add _ after closing bracket of @library
+
+library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+    remote: 'https://gitlab.com/ankit241/jenkins-shared-library.git'])
+    credentialsId: 'gitlab-id-pass'
+)
+
 def gv
 
 pipeline{
