@@ -31,7 +31,7 @@ pipeline{
         stage("Build Image"){
             steps{
                 script{
-                    buildImage()
+                    buildImage 'ankitraz/myapp:1.0'
                 }
             }
         }
