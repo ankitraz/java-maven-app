@@ -13,7 +13,7 @@ pipeline{
         stage("init"){
             steps{
                 script{
-                    gv = load "basic-jenkins-pipeline/script.groovy"  
+                    gv = load "script.groovy"
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline{
         stage("Build jar"){
             steps{
                 script{
-                    gv.Build()
+                    gv.build()
                 }
             }
         }
