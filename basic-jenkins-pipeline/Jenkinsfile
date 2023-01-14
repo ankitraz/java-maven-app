@@ -27,7 +27,7 @@ pipeline{
         stage("init"){
             steps{
                 script{
-                    gv = load "script.groovy"
+                    gv = load "basic-jenkins-pipeline/script.groovy"
                 }
             }
         }
@@ -36,6 +36,7 @@ pipeline{
             steps{
                 script{
                     sh "mvn clean package"
+                    sh "building jar"
                     gv.build()
                 }
             }
