@@ -9,6 +9,20 @@ pipeline{
 
     stages{
 
+        stage('increment version'){
+            steps{
+                script{
+                    echo 'incrementing app version'
+                    sh 'mvn build-helper:parse-version versions:set \
+                    -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                     versions:commit'
+                     def matcher = readFile(pom.xml) =~ '<version>(.+)</version>'
+                     def version = matcher[0][1]
+                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                }
+            }
+        }
+
 
         stage("init"){
             steps{
@@ -21,6 +35,7 @@ pipeline{
         stage("Build jar"){
             steps{
                 script{
+                    sh "mvn clean package"
                     gv.build()
                 }
             }
@@ -30,9 +45,9 @@ pipeline{
             steps{
                 echo "Building the docker image..."
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-id-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){
-                    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                    sh 'docker build -t ankitraz/myapp:ank-1.0 .'
-                    sh 'docker push ankitraz/myapp:ank-1.0'
+                    sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+                    sh "docker build -t ankitraz/myapp:$IMAGE_NAME ."
+                    sh "docker push ankitraz/myapp:$IMAGE_NAME"
                 }
             }
         }
@@ -46,7 +61,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "Deploying the application..."
-                echo "Version: anki-1.0"
+                echo "Version: $IMAGE_NAME"
             }
         }
     }
