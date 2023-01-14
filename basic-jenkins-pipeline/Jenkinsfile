@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def gv
+
 pipeline{
     agent any
 
@@ -38,7 +38,7 @@ pipeline{
                 script{
                     sh "mvn clean package"
                     sh "building jar"
-                    gv.build()
+
                 }
             }
         }
