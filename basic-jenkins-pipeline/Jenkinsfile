@@ -79,7 +79,7 @@ pipeline{
                         sh 'git branch'
                         sh 'git config --list'
                         
-                        // sh "git remote add origin https://${USER}:${PASS}@gitlab.com/ankit241/java-maven-appp.git"
+                        sh "git add origin https://${USER}:${PASS}@github.com/${ankit241}/java-maven-appp.git"
                         sh 'git add .'
                         sh 'git commit -m "ci:version bump"'
                         sh 'git push origin jenkins-jobs'
