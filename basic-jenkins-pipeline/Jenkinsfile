@@ -36,9 +36,8 @@ pipeline{
         stage("Build jar"){
             steps{
                 script{
+                    echo "build package"
                     sh "mvn clean package"
-                    sh "building jar"
-//                     gv.build()
 
                 }
             }
