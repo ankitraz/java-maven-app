@@ -39,7 +39,6 @@ pipeline{
             steps{
                 script{
                     deploytoec2()
-                    //fixed shared library again
                 }
             }
         }
