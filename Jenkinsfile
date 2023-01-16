@@ -40,7 +40,7 @@ pipeline{
             steps{
                 script{
                     buildImage 'ankitraz/myapp:1.0'
-                    dockerLogin() //now it should work
+                    dockerLogin()
                     dockerPush 'ankitraz/myapp:1.0'
                 }
             }
